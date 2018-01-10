@@ -10,7 +10,7 @@ def get_folder():
 
 def get_files():
     files = []
-        files.append({
+    files.append({
         "filename": "enavant.wav",
         "class": "forward",
     })
