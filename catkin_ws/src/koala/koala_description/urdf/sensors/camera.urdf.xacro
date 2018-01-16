@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!-- http://www.k-team.com/mobile-robotics-products/old-products/koala/picoitx -->
+<robot name="camera" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+  <xacro:property name="camera_axis_length" value="0.1" />
+  <xacro:property name="camera_axis_radius" value="0.025" />
+
+  <xacro:macro name="camera" params="x_loc y_loc z_loc"> 
+    
+    <joint name="camera_pan_joint" type="fixed">
+      <origin xyz="${x_loc} ${y_loc} ${z_loc}" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="camera_pan_link"/>
+    </joint>
+    <link name="camera_pan_link">
+      <visual>
+	<origin xyz="0 0 ${camera_axis_length/2}" rpy="0 0 0" />
+	<geometry>
+          <cylinder length="${camera_axis_length}" radius="${camera_axis_radius}"/>
+	</geometry>
+	<material name="gray">
+	  <color rgba="0.5 0.5 0.5 1"/>
+	</material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 ${camera_axis_length}" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="${camera_axis_length}" radius="${camera_axis_radius}"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="camera_pan_tilt_joint" type="fixed">
+      <origin xyz="0 0 ${camera_axis_length}" rpy="0 0 0"/>
+      <parent link="camera_pan_link"/>
+      <child link="camera_pan_tilt_link"/>
+    </joint>
+    <link name="camera_pan_tilt_link">
+      <visual>
+	<origin xyz="0 0 0" rpy="0 0 0" />
+	<geometry>
+          <sphere radius="${camera_axis_radius}"/>
+	</geometry>
+	<material name="gray">
+	  <color rgba="0.5 0.5 0.5 1"/>
+	</material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <sphere radius="${camera_axis_radius}"/>
+        </geometry>
+      </collision>
+    </link>
+
+  </xacro:macro>
+</robot>
