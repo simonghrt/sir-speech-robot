@@ -1,7 +1,7 @@
 import pickle
 import speech_process as sp
 
-folder = "/usr/users/promo2018/juge_rem/sir-speech-robot/data/"
+folder = "../../../../../../sir-speech-robot/data/"
 
 rossignol_set = []
 rossignol_set.append({
