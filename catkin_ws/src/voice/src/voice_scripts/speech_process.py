@@ -178,7 +178,7 @@ def test_set_to_reference(test_set, reference_set, verbose=False):
 def predict(test_set, reference_set, verbose=False):
     test_file = test_set[0]
     dtw_distance = []
-    for refIdx in range(len(reference_set)):
+    for ref_idx in range(len(reference_set)):
         ref_file = reference_set[ref_idx]
         dtw_distance.append({'class': ref_file.get('class'), 'dtw': altDTWDistance(test_file.get('mfcc'), ref_file.get('mfcc'), 15)})
     classes = get_k_nn(dtw_distance, 1)
