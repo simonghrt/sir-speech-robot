@@ -188,12 +188,12 @@ def predict(test_set, reference_set, verbose=False):
         elif(max(classes) == classes[1]): print("Prediction: Right") 
         elif(max(classes) == classes[2]): print("Prediction: Left") 
         elif(max(classes) == classes[3]): print("Prediction: Stop")
-    if(max(classes = classes[0]):
+    if(max(classes = classes[0])):
         return "forward"
-    elif(max(classes = classes[1]):
+    elif(max(classes = classes[1])):
         return "right"
-    elif(max(classes = classes[2]):
+    elif(max(classes = classes[2])):
         return "left"
-    elif(max(classes = classes[3]):
+    elif(max(classes = classes[3])):
         return "stop"
     return None
