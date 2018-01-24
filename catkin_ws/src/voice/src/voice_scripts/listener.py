@@ -38,9 +38,10 @@
 
 import rospy
 from std_msgs.msg import String
+from geometry_msgs.msg import Twist
 
 def callback(data):
-    rospy.loginfo(rospy.get_caller_id() + 'I heard %s', data.data)
+    rospy.loginfo(rospy.get_caller_id() + 'I heard %s', data)
 
 def listener():
 
@@ -51,7 +52,7 @@ def listener():
     # run simultaneously.
     rospy.init_node('listener', anonymous=True)
 
-    rospy.Subscriber('chatter', String, callback)
+    rospy.Subscriber('cmd_vel', Twist, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
