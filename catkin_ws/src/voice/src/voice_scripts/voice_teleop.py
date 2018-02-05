@@ -9,7 +9,7 @@ from std_msgs.msg import String
 import speech_process as sp
 import pickle
 
-f_wav = ""
+#f_wav = ""
 
 def callback_function(data):
     print("Message received: ", data)
@@ -18,7 +18,7 @@ def callback_function(data):
 
 def main():
     pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
-    rospy.Subscriber('voice_message', String, callback_function)
+#    rospy.Subscriber('voice_message', String, callback_function)
     rospy.init_node('voice_teleop', anonymous=True)
     rate = rospy.Rate(10) 
     twist = Twist()
@@ -32,11 +32,11 @@ def main():
    # stdscr.addstr(" - ESC        : reset twist and exit\n")
     # We set the "wait for a key press" period to 100 ms. 
    # if(persist): stdscr.timeout(100)
+    f_wav = ""
     while (not rospy.is_shutdown()) and (f_wav != "exit"): # 27 is escape
 	try:
-           # f_wav = raw_input("Entrez un nom de fichier (sans l'extension, exit pour stopper): ")
+            f_wav = raw_input("Entrez un nom de fichier (sans l'extension, exit pour stopper): ")
 	    audio_data = [{"filename":f_wav + ".wav", "class":"unknown"}]
-            print("audio data is ", audio_data)
             processed_file = sp.compute_set(data_folder, audio_data)
             voicecode = sp.predict(test_set=processed_file, reference_set=ref_set, verbose=True)
 	except:
