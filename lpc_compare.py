@@ -246,7 +246,7 @@ def dsp_calculation_audiolazy(signal, K, a, nu):
 
 # Process file getting lpc coefficients
 
-def process_file(filename):
+def process_file(filename, K):
     signal_wave = wave.open(filename)
     (nchannels, sampwidth, framerate, nframes, comptype, compname) = signal_wave.getparams()
 
@@ -261,7 +261,6 @@ def process_file(filename):
     for i in np.arange(0, len(sig_in), 160, dtype=int):
         signals.append(sig_in[i:i+480])
         
-    K = 25
     a_arr = []
     dsp_arr = []
     t = np.arange(0, 0.01 * len(signals), 0.01)
@@ -339,10 +338,10 @@ def get_k_nn(distance, k):
             classes[3] = classes[3] + 1
     return classes
 
-def compute_set(folder, files):
+def compute_set(folder, files, K):
     for fileIdx in range(len(files)):
         filename = files[fileIdx].get('filename')
-        mfcc = process_file(folder + filename)
+        mfcc = process_file(folder + filename, K)
         files[fileIdx]['mfcc'] = mfcc
     return files
 
@@ -403,7 +402,8 @@ def test_set_to_reference(test_set, reference_set, verbose=False):
 
 
 # ## Evaluating datasets
-reference_set = compute_set(folder=folder, files=paul_set + rossignol_set)
-test_set = compute_set(folder=folder, files=remi_set)
+K = 25
+reference_set = compute_set(folder=folder, files=paul_set + rossignol_set, K=K)
+test_set = compute_set(folder=folder, files=remi_set, K=K)
 test_set = test_set_to_reference(test_set=test_set, reference_set=reference_set, verbose=False)
 

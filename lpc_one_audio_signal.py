@@ -149,7 +149,7 @@ def plt_dsp(signals, K, audiolazy, fe):
 t0 = time()
 K = 25
 audiolazy = True
-[signals, fe] = get_signal_from_wav("stop.wav")
+[signals, fe] = get_signal_from_wav("stop_1_paul.wav")
 plt_dsp(signals, K, audiolazy, fe)
 t1 = time()
 print('Executed in {}'.format(t1 - t0))
