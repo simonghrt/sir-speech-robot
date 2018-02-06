@@ -6,7 +6,7 @@ from audio_common_msgs.msg import AudioData
 
 def callback(data):
     #rospy.loginfo(rospy.get_caller_id() + "I heard %i", data.data)
-    print np.fromstring(data.data, np.uint8)
+    print data.data
 def listener():
 
     # In ROS, nodes are uniquely named. If two nodes with the same

@@ -19,7 +19,7 @@
 (defmethod audio_common_msgs::AudioData
   (:init
    (&key
-    ((:data __data) (make-array 0 :initial-element 0 :element-type :char))
+    ((:data __data) (make-array 0 :initial-element 0 :element-type :integer))
     )
    (send-super :init)
    (setq _data __data)
@@ -30,37 +30,42 @@
   (:serialization-length
    ()
    (+
-    ;; uint8[] _data
-    (* 1    (length _data)) 4
+    ;; int16[] _data
+    (* 2    (length _data)) 4
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; uint8[] _data
+     ;; int16[] _data
      (write-long (length _data) s)
-     (princ _data s)
+     (dotimes (i (length _data))
+       (write-word (elt _data i) s)
+       )
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; uint8[] _data
-   (let ((n (sys::peek buf ptr- :integer))) (incf ptr- 4)
-     (setq _data (make-array n :element-type :char))
-     (replace _data buf :start2 ptr-) (incf ptr- n))
+   ;; int16[] _data
+   (let (n)
+     (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4)
+     (setq _data (instantiate integer-vector n))
+     (dotimes (i n)
+     (setf (elt _data i) (sys::peek buf ptr- :short)) (incf ptr- 2)
+     ))
    ;;
    self)
   )
 
-(setf (get audio_common_msgs::AudioData :md5sum-) "f43a8e1b362b75baa741461b46adc7e0")
+(setf (get audio_common_msgs::AudioData :md5sum-) "8560fbebb34fa1b9472337b5c3d38fda")
 (setf (get audio_common_msgs::AudioData :datatype-) "audio_common_msgs/AudioData")
 (setf (get audio_common_msgs::AudioData :definition-)
-      "uint8[] data
+      "int16[] data
 
 ")
 
 
 
-(provide :audio_common_msgs/AudioData "f43a8e1b362b75baa741461b46adc7e0")
+(provide :audio_common_msgs/AudioData "8560fbebb34fa1b9472337b5c3d38fda")
 
 
