@@ -33,7 +33,7 @@ struct AudioData_
 
 
 
-   typedef std::vector<uint8_t, typename ContainerAllocator::template rebind<uint8_t>::other >  _data_type;
+   typedef std::vector<int16_t, typename ContainerAllocator::template rebind<int16_t>::other >  _data_type;
   _data_type data;
 
 
@@ -113,12 +113,12 @@ struct MD5Sum< ::audio_common_msgs::AudioData_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "f43a8e1b362b75baa741461b46adc7e0";
+    return "8560fbebb34fa1b9472337b5c3d38fda";
   }
 
   static const char* value(const ::audio_common_msgs::AudioData_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xf43a8e1b362b75baULL;
-  static const uint64_t static_value2 = 0xa741461b46adc7e0ULL;
+  static const uint64_t static_value1 = 0x8560fbebb34fa1b9ULL;
+  static const uint64_t static_value2 = 0x472337b5c3d38fdaULL;
 };
 
 template<class ContainerAllocator>
@@ -137,7 +137,7 @@ struct Definition< ::audio_common_msgs::AudioData_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "uint8[] data\n\
+    return "int16[] data\n\
 ";
   }
 
@@ -179,7 +179,7 @@ struct Printer< ::audio_common_msgs::AudioData_<ContainerAllocator> >
     for (size_t i = 0; i < v.data.size(); ++i)
     {
       s << indent << "  data[" << i << "]: ";
-      Printer<uint8_t>::stream(s, indent + "  ", v.data[i]);
+      Printer<int16_t>::stream(s, indent + "  ", v.data[i]);
     }
   }
 };
