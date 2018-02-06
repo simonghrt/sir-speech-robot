@@ -52,8 +52,8 @@ def process_file(filename):
     nperseg = math.floor(fs*2/100)
     overlap = math.floor(nperseg/2)
     NFFT = 2*nperseg
-    data_signal = np.array(a,dtype=uint8)
-    data_signal = apply_preemphasis_filter(data_signal)
+    #data_signal = np.array(a,dtype=uint8)
+    data_signal = apply_preemphasis_filter(a)
     f, t, Zxx = apply_stft(data_signal, nperseg, overlap, fs, NFFT)
     filter_banks = apply_filter_banks(Zxx, fs, NFFT)
     mfcc = apply_mfcc(filter_banks)

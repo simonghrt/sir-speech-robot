@@ -5,7 +5,7 @@
   <arg name="device" default=""/>
   <arg name="channels" default="1"/>
   <arg name="sample_rate" default="16000"/>
-  <arg name="format" default="mp3"/>
+  <arg name="format" default="wave"/>
   <arg name="ns" default="audio"/>
 
   <group ns="$(arg ns)">
